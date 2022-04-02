@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilivaCase.Application.dtos.order
+namespace MobilivaCase.Application
 {
     public class ProductDetail
     {

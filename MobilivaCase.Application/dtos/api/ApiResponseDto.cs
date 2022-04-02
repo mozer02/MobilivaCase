@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilivaCase.Application.dtos.api
+namespace MobilivaCase.Application
 {
-    public enum Status
+    public enum StatusEnum
     {
         Success = 100,
         Failed = 101

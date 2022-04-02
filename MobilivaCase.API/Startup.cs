@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MobilivaCase.Application;
 using MobilivaCase.Domain.repositories;
 using MobilivaCase.Persistence.EF;
 using System;
@@ -43,6 +44,7 @@ namespace MobilivaCase.API
 
             services.AddScoped<IOrderDetailRepository, EFOrderDetailsRepository>();
             services.AddScoped<IProductRepository, EFProductRepository>();
+            services.AddScoped<IGetProductService, GetProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
