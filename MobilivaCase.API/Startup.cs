@@ -1,12 +1,16 @@
+using AgileManagement.Persistence.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MobilivaCase.Domain.repositories;
+using MobilivaCase.Persistence.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +36,13 @@ namespace MobilivaCase.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MobilivaCase.API", Version = "v1" });
             });
+            services.AddDbContext<AppDbContext>(opt =>
+            {
+                opt.UseMySQL(Configuration.GetConnectionString("LocalDb"));                
+            });
+
+            services.AddScoped<IOrderDetailRepository, EFOrderDetailsRepository>();
+            services.AddScoped<IProductRepository, EFProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
