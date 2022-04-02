@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MobilivaCase.Application\MobilivaCase.Application.csproj" />
+    <ProjectReference Include="..\MobilivaCase.Core\MobilivaCase.Core.csproj" />
+    <ProjectReference Include="..\MobilivaCase.Infrastructure\MobilivaCase.Infrastructure.csproj" />
+    <ProjectReference Include="..\MobilivaCase.Persistence\MobilivaCase.Persistence.EF.csproj" />
+  </ItemGroup>
+
+</Project>
