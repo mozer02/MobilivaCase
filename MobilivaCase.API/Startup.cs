@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MobilivaCase.Application;
+using MobilivaCase.Domain;
 using MobilivaCase.Domain.repositories;
 using MobilivaCase.Persistence.EF;
 using System;
@@ -43,6 +44,7 @@ namespace MobilivaCase.API
             });
 
             services.AddScoped<IOrderDetailRepository, EFOrderDetailsRepository>();
+            services.AddScoped<IOrderRepository, EFOrderRepository>();
             services.AddScoped<IProductRepository, EFProductRepository>();
             services.AddScoped<IGetProductService, GetProductService>();
         }

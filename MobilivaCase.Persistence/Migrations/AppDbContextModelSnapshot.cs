@@ -41,7 +41,7 @@ namespace MobilivaCase.Persistence.EF.Migrations
 
                     b.HasIndex("orderDetailId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("MobilivaCase.Domain.models.OrderDetail", b =>

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MobilivaCase.Persistence.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220402223355_Mig1")]
-    partial class Mig1
+    [Migration("20220403182617_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,7 +43,7 @@ namespace MobilivaCase.Persistence.EF.Migrations
 
                     b.HasIndex("orderDetailId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("MobilivaCase.Domain.models.OrderDetail", b =>

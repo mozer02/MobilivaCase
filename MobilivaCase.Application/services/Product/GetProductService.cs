@@ -18,19 +18,17 @@ namespace MobilivaCase.Application
         public ApiResponseDto<Product> OnProcess(string request = null)
         {
             var response = new ApiResponseDto<Product>();
-            //var statusEnum = new StatusEnum();
             try
             {
                 response.Data = _productRepository.GetQuery().Where(x => x.Category == request).ToList();
                 response.ResultMessage = "İşlem Başarılı";
-                response.Status= 100;
-                response.ErrorCode = "200";
+                response.Status = StatusEnum.Success;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 response.ResultMessage = "İşlem Başarısız";
-                response.Status = 101;
-                response.ErrorCode = "400";                
+                response.Status = StatusEnum.Failed;
+                response.ErrorCode = e.Message;                
             }
 
             return response;

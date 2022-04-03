@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilivaCase.Application
+namespace MobilivaCase.Domain
 {
-    public interface IGetProductService:IApplicationService<string,ApiResponseDto<Product>>
+    public interface IOrderRepository:IRepository<Order>
     {
     }
 }

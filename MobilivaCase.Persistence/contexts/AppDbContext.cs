@@ -22,12 +22,13 @@ namespace AgileManagement.Persistence.EF
         }
     }
 
-    public  class AppDbContext:DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Product>  Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions):base(dbContextOptions)
+        public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions)
         {
 
         }

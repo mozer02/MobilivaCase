@@ -14,7 +14,7 @@ namespace MobilivaCase.Application
     public class ApiResponseDto<TData>
     {
         //Status (Success,Failed enum) , ResultMessage, ErrorCode, Data (GenericType) 
-        public int Status { get; set; }
+        public StatusEnum Status { get; set; }
         public string ResultMessage { get; set; }
         public string ErrorCode { get; set; }
         public List<TData> Data { get; set; }       

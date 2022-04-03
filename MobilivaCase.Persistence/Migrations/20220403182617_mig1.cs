@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MobilivaCase.Persistence.EF.Migrations
 {
-    public partial class Mig1 : Migration
+    public partial class mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,7 @@ namespace MobilivaCase.Persistence.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(767)", nullable: false),
@@ -32,9 +32,9 @@ namespace MobilivaCase.Persistence.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_OrderDetails_orderDetailId",
+                        name: "FK_Orders_OrderDetails_orderDetailId",
                         column: x => x.orderDetailId,
                         principalTable: "OrderDetails",
                         principalColumn: "Id",
@@ -67,8 +67,8 @@ namespace MobilivaCase.Persistence.EF.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_orderDetailId",
-                table: "Order",
+                name: "IX_Orders_orderDetailId",
+                table: "Orders",
                 column: "orderDetailId");
 
             migrationBuilder.CreateIndex(
@@ -80,7 +80,7 @@ namespace MobilivaCase.Persistence.EF.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");
