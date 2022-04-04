@@ -14,7 +14,8 @@ namespace MobilivaCase.Domain.models
         public string CustomerEmail { get; set; }
         public string CustomerGSM { get; set; }
         public decimal TotalAmount { get; set; }
-        public OrderDetail orderDetail { get; set; }
+        private List<OrderDetail> orderDetails = new List<OrderDetail>();
+        public IReadOnlyList<OrderDetail> OrderDetails => orderDetails;
         public Order()
         {
             Id = Guid.NewGuid().ToString();

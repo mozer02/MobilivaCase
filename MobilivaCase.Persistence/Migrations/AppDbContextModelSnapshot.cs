@@ -34,12 +34,7 @@ namespace MobilivaCase.Persistence.EF.Migrations
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.Property<string>("orderDetailId")
-                        .HasColumnType("varchar(767)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("orderDetailId");
 
                     b.ToTable("Orders");
                 });
@@ -49,10 +44,20 @@ namespace MobilivaCase.Persistence.EF.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(767)");
 
+                    b.Property<string>("OrderId")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<string>("ProductId")
+                        .HasColumnType("varchar(767)");
+
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -83,39 +88,30 @@ namespace MobilivaCase.Persistence.EF.Migrations
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("orderDetailId")
-                        .HasColumnType("varchar(767)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("orderDetailId");
 
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("MobilivaCase.Domain.models.OrderDetail", b =>
+                {
+                    b.HasOne("MobilivaCase.Domain.models.Order", null)
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("MobilivaCase.Domain.models.Product", null)
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ProductId");
+                });
+
             modelBuilder.Entity("MobilivaCase.Domain.models.Order", b =>
                 {
-                    b.HasOne("MobilivaCase.Domain.models.OrderDetail", "orderDetail")
-                        .WithMany("Orders")
-                        .HasForeignKey("orderDetailId");
-
-                    b.Navigation("orderDetail");
+                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("MobilivaCase.Domain.models.Product", b =>
                 {
-                    b.HasOne("MobilivaCase.Domain.models.OrderDetail", "orderDetail")
-                        .WithMany("Products")
-                        .HasForeignKey("orderDetailId");
-
-                    b.Navigation("orderDetail");
-                });
-
-            modelBuilder.Entity("MobilivaCase.Domain.models.OrderDetail", b =>
-                {
-                    b.Navigation("Orders");
-
-                    b.Navigation("Products");
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }

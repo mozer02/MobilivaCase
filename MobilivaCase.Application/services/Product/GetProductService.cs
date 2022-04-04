@@ -10,7 +10,7 @@ namespace MobilivaCase.Application
 {
     public class GetProductService : IGetProductService
     {
-        private readonly IProductRepository _productRepository;       
+        private readonly IProductRepository _productRepository;
         public GetProductService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
@@ -20,7 +20,15 @@ namespace MobilivaCase.Application
             var response = new ApiResponseDto<Product>();
             try
             {
-                response.Data = _productRepository.GetQuery().Where(x => x.Category == request).ToList();
+                if (string.IsNullOrEmpty(request))
+                {
+                    response.Data = _productRepository.GetQuery().ToList();
+                }
+                else
+                {
+                    response.Data = _productRepository.GetQuery().Where(x => x.Category == request).ToList();
+                }
+               
                 response.ResultMessage = "İşlem Başarılı";
                 response.Status = StatusEnum.Success;
             }
@@ -28,10 +36,11 @@ namespace MobilivaCase.Application
             {
                 response.ResultMessage = "İşlem Başarısız";
                 response.Status = StatusEnum.Failed;
-                response.ErrorCode = e.Message;                
+                response.ErrorCode = e.Message;
             }
 
             return response;
         }
+
     }
 }

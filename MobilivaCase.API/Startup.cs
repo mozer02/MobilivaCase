@@ -40,13 +40,14 @@ namespace MobilivaCase.API
             });
             services.AddDbContext<AppDbContext>(opt =>
             {
-                opt.UseMySQL(Configuration.GetConnectionString("LocalDb"));                
+                opt.UseMySQL(Configuration.GetConnectionString("Default"));
             });
 
             services.AddScoped<IOrderDetailRepository, EFOrderDetailsRepository>();
             services.AddScoped<IOrderRepository, EFOrderRepository>();
             services.AddScoped<IProductRepository, EFProductRepository>();
             services.AddScoped<IGetProductService, GetProductService>();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

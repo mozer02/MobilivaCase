@@ -16,7 +16,8 @@ namespace MobilivaCase.Domain.models
         public bool Status { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
-        public OrderDetail orderDetail { get; set; }
+        private List<OrderDetail> orderDetails = new List<OrderDetail>();
+        public IReadOnlyList<OrderDetail> OrderDetails => orderDetails;
         public Product()
         {
             Id = Guid.NewGuid().ToString();
