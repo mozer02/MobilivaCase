@@ -47,6 +47,7 @@ namespace MobilivaCase.API
             services.AddScoped<IOrderRepository, EFOrderRepository>();
             services.AddScoped<IProductRepository, EFProductRepository>();
             services.AddScoped<IGetProductService, GetProductService>();
+            services.AddScoped<ICreateOrderService, CreateOrderService>();
             services.AddMemoryCache();
         }
 

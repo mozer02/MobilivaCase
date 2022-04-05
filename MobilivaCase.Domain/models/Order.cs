@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MobilivaCase.Domain.models
 {
-    public class Order:Entity
+    public class Order : Entity
     {
         // Id, CustomerName, CustomerEmail, CustomerGSM, TotalAmount 
         public string CustomerName { get; set; }
@@ -19,6 +19,10 @@ namespace MobilivaCase.Domain.models
         public Order()
         {
             Id = Guid.NewGuid().ToString();
+        }
+        public void AddOrderDetail(OrderDetail orderDetail)
+        {
+            orderDetails.Add(orderDetail);
         }
     }
 }

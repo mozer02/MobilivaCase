@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using MobilivaCase.Application;
+using MobilivaCase.Domain.models;
+using MobilivaCase.Persistence.EF.FakeData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +13,24 @@ namespace MobilivaCase.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class HomeController : ControllerBase
     {
         private readonly IGetProductService _getProductService;
         private readonly IMemoryCache _memoryCache;
-        public ProductsController(IGetProductService getProductService, IMemoryCache memoryCache)
+        private readonly ICreateOrderService _createOrderService;
+        private static List<Product> _products = FakeData.GetProducts();
+
+        public HomeController(IGetProductService getProductService, IMemoryCache memoryCache, ICreateOrderService createOrderService)
         {
             _getProductService = getProductService;
             _memoryCache = memoryCache;
+            _createOrderService = createOrderService;
         }
 
         [HttpGet("GetProducts")]
         public IActionResult GetProduct(string category)
         {
-            
+
             var key = category;
             if (string.IsNullOrEmpty(category))
             {
@@ -44,6 +50,17 @@ namespace MobilivaCase.API.Controllers
                 });
                 return Ok(response);
             }
+        }
+        [HttpGet]
+        public List<Product> Get()
+        {
+            return _products;
+        }
+        [HttpPost("CreateOrder")]
+        public IActionResult CreateOrder(CreateOrderRequestDto createOrderRequestDto)
+        {
+            var response = _createOrderService.OnProcess(createOrderRequestDto);
+            return Ok(response);
         }
     }
 }

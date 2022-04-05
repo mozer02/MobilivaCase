@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using MobilivaCase.Domain.models;
+using MobilivaCase.Persistence.EF.FakeData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,6 @@ namespace AgileManagement.Persistence.EF
 
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
@@ -27,7 +27,6 @@ namespace AgileManagement.Persistence.EF
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-
         public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions) : base(dbContextOptions)
         {
 

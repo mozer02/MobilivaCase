@@ -11,6 +11,7 @@ namespace MobilivaCase.Domain.models
     {
         //OrderId, ProductId, UnitPrice
         public decimal UnitPrice { get; set; }
+        public Product Product { get; set; }
         public OrderDetail()
         {
             Id = Guid.NewGuid().ToString();
