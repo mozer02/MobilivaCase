@@ -15,6 +15,7 @@ using MobilivaCase.Core.domain;
 using MobilivaCase.Domain;
 using MobilivaCase.Domain.models;
 using MobilivaCase.Domain.repositories;
+using MobilivaCase.Infrastructure;
 using MobilivaCase.Persistence.EF;
 using System;
 using System.Collections.Generic;

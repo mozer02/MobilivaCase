@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MobilivaCase.Core.domain;
 using MobilivaCase.Core.entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilivaCase.Core.domain
+namespace MobilivaCase.Infrastructure
 {
     public class SmtpConfiguration : ISmtpConfiguration
     {
