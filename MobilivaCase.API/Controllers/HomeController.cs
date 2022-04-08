@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using MobilivaCase.Application;
+using MobilivaCase.Core.domain;
 using MobilivaCase.Domain.models;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace MobilivaCase.API.Controllers
         private readonly IGetProductService _getProductService;
         private readonly IMemoryCache _memoryCache;
         private readonly ICreateOrderService _createOrderService;
+
 
         public HomeController(IGetProductService getProductService, IMemoryCache memoryCache, ICreateOrderService createOrderService)
         {

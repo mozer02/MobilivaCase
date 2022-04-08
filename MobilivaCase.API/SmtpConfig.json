@@ -1,0 +1,7 @@
+{
+  "Host": "smtp.gmail.com",
+  "Port": "587",
+  "User": "mobilivacase@gmail.com",
+  "Password": "mobilivacase34",
+  "UseSSL": "true"
+}

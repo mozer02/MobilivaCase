@@ -1,4 +1,8 @@
-﻿using MobilivaCase.Domain;
+﻿using MobilivaCase.API.ViewModel;
+using MobilivaCase.Core.consts;
+using MobilivaCase.Core.domain;
+using MobilivaCase.Core.entities;
+using MobilivaCase.Domain;
 using MobilivaCase.Domain.models;
 using MobilivaCase.Domain.repositories;
 using System;
@@ -13,15 +17,32 @@ namespace MobilivaCase.Application
     {
         private readonly IProductRepository _productRepository;
         private readonly IOrderRepository _orderRepository;
-        public CreateOrderService(IProductRepository productRepository, IOrderRepository orderRepository)
+        private readonly ISmtpConfiguration _smtpConfig;
+        private readonly IPublisherService _publisherService;
+        public CreateOrderService(IProductRepository productRepository, IOrderRepository orderRepository, ISmtpConfiguration smtpConfig, IPublisherService publisherService)
         {
             _productRepository = productRepository;
             _orderRepository = orderRepository;
+            _smtpConfig = smtpConfig;
+            _publisherService = publisherService;
+        }
+        private MailMessageData PrepareMessages(PostMailViewModel post,string email)
+        {
+            var message = new MailMessageData()
+            {
+                To = email.ToString(),
+                From = _smtpConfig.User,
+                Subject = post.Post.Title,
+                Body = post.Post.Content
+            };              
+            
+            return message;
         }
         public string OnProcess(CreateOrderRequestDto request = null)
         {
-            decimal TotalPrice = 0;
+            decimal TotalPrice = 0; 
             var order = new Order();
+            var post = new PostMailViewModel();
             order.CustomerEmail = request.CustomerEmail;
             order.CustomerGSM = request.CustomerGSM;
             order.CustomerName = request.CustomerName;
@@ -39,7 +60,12 @@ namespace MobilivaCase.Application
             order.TotalAmount = TotalPrice;
             _orderRepository.Add(order);
             _orderRepository.Save();
-
+            post.Post.Content = "Sipariş Başarılı bir şekilde oluşturulmuştur.";
+            post.Post.Title = "Sipariş Detayı";
+            //_publisherService.Enqueue(
+            //                          PrepareMessages(post, request.CustomerEmail),
+            //                          RabbitMQConsts.RabbitMqConstsList.QueueNameEmail.ToString()
+            //                        );
             return order.Id;
         }
     }

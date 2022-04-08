@@ -10,7 +10,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MobilivaCase.Application;
+using MobilivaCase.Core.data;
+using MobilivaCase.Core.domain;
 using MobilivaCase.Domain;
+using MobilivaCase.Domain.models;
 using MobilivaCase.Domain.repositories;
 using MobilivaCase.Persistence.EF;
 using System;
@@ -49,6 +52,14 @@ namespace MobilivaCase.API
             services.AddScoped<IGetProductService, GetProductService>();
             services.AddScoped<ICreateOrderService, CreateOrderService>();
             services.AddMemoryCache();
+            services.AddScoped<IRabbitMQService, RabbitMQService>();
+            services.AddScoped<IRabbitMQConfiguration, RabbitMQConfiguration>();
+            services.AddScoped<IObjectConvertFormat, ObjectConvertFormatManager>();
+            services.AddScoped<IMailSender, MailSender>();
+            //services.AddScoped<IDataModel<Order>, UsersDataModel>();
+            services.AddScoped<ISmtpConfiguration, SmtpConfiguration>();
+            services.AddScoped<IPublisherService, PublisherManager>();
+            services.AddScoped<IConsumerService, ConsumerManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
